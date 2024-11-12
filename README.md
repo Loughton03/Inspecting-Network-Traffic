@@ -2,35 +2,74 @@
 <img src="https://i.imgur.com/Clzj7Xs.png" alt="osTicket logo"/>
 </p>
 
-<h1>osTicket - Prerequisites and Installation</h1>
-This tutorial outlines the prerequisites and installation of the open-source help desk ticketing system osTicket.<br />
-
-<h2>What is osTicket?</h2>
-
-- osTicket is a widely-used open source support ticket system. It integrates inquiries created via email, phone and web-based forms into a simple easy-to-use multi-user web interface. Manage, organize and archive all your support requests and responses in one place to provide customers with accountability and responsiveness.
+<h1>Inspecting Network Traffic Between Azure Virtual Machines</h1>
+In this lab, I explored and analyzed network traffic to and from Azure virtual machines using Wireshark and experimented with network security groups to better understand their impact on traffic control.<br />
 
 <h2>Environments and Technologies Used</h2>
 
 - Microsoft Azure (Virtual Machines/Compute)
-- Remote Desktop
-- Internet Information Services (IIS)
-- Heidi SQL
+- Remote Desktop Connection
+- Command-Line Tools
+- Network Protocols: SSH, RDP, DNS, HTTP/S, ICMP
+- Wireshark (Protocol Analyzer)
 
 <h2>Operating Systems Used </h2>
-
 - Windows 10</b> (21H2)
+- Ubuntu Server 22.04
 
 <h2>List of Prerequisites</h2>
 
 - Azure Virtual Machine
 - osTicket Installation Files
 
-<h2>Installation Steps</h2>
+<h2>Lab Set-Up</h2>
+<p>I created two virtual machines within Azure on the same virtual network to enable internal communication. One VM was configured with Windows 10 Pro and the other with Ubuntu Server 20.04.</p>
+
+<h2>Actions and Observations</h2>
+
+<p>
+Using Remote Desktop Connection, I connected to the Windows VM using its public IP address and installed Wireshark to begin traffic inspection.
+</p>
+
+<p>
+<b>ICMP Traffic Analysis:</b>
+  
+I filtered for ICMP (Internet Control Message Protocol) traffic in Wireshark and used PowerShell to execute the ping command. This command uses ICMP to test connectivity by pinging the Ubuntu VM's private IP and google.com. I then used a continuous ping (ping -t [IP address]) to monitor traffic and demonstrate how network security groups function.
+
+
+In the Azure portal, I added an inbound rule to the Ubuntu VM's network security group to block ICMP traffic, ensuring it had a higher priority than the SSH rule (priority 300) to apply the block first. Upon returning to the Windows VM, I observed that ICMP traffic was indeed blocked until I lifted the rule; at this point, the continuous ping resumed without timeouts.
+</p>
+   
+
+<p>
+SSH Traffic Analysis:
+  
+Using PowerShell, I connected to the Ubuntu server via SSH and filtered Wireshark traffic for tcp port == 22 to capture SSH sessions. Each command executed on the Ubuntu server was logged in Wireshark, giving visibility into the SSH session traffic.
+</p>
+
+<p>
+DHCP Traffic Analysis:
+
+After logging out of the Ubuntu server, I filtered Wireshark for DHCP traffic. Using the ipconfig /renew command, I requested a new IP address from my VM, causing a brief disconnection as the IP renewed. Wireshark displayed the resulting DHCP traffic, showing the IP assignment process.
+</p>
+
+<p>
+DNS Traffic Analysis:
+
+I filtered Wireshark for DNS traffic on udp port == 53 and used the nslookup command to query google.com and disney.com. The captured traffic displayed the DNS resolution process for these domains.
+</p>
+
+<p>
+RDP Traffic Analysis:
+
+Finally, I observed RDP (Remote Desktop Protocol) traffic using Wireshark's filter tcp port == 3389. Since RDP continuously streams a live feed from one machine to another, there was a constant traffic flow as I accessed the Azure-hosted VM from my local machine.
+</p>
+
+<p>
+This lab provided valuable insights into how various protocols and ports function within a networked environment. Although it wasn't a troubleshooting exercise, it demonstrated how Wireshark and command-line tools can observe network traffic and understand its flow through different protocols.
+</p>
+<br />
 
 <p>
 <img src="https://i.imgur.com/VBjp96K.png" height="80%" width="80%" alt="Resource Group Setup"/>
 </p>
-<p>
-First, we will set up a Resource Group (RG) in the Microsoft Azure Cloud Service. A resource group can be considered a folder that holds resources. We will name this resource group "osTickets" and set its location to US East. It is best practice to select the location closest to you. Please take note of the region where the RG is created, as it will be used in future instances.
-</p>
-<br />
