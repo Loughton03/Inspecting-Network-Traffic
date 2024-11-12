@@ -84,7 +84,9 @@ I filtered Wireshark for DNS traffic on udp port == 53 and used the nslookup com
 <p>
 RDP Traffic Analysis:
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<p>
+<img src="https://i.imgur.com/qM7Botr.png" height="80%" width="80%" alt="Observing-RDP-Traffic"/>
+</p>
 
 Finally, I observed RDP (Remote Desktop Protocol) traffic using Wireshark's filter tcp port == 3389. Since RDP continuously streams a live feed from one machine to another, there was a constant traffic flow as I accessed the Azure-hosted VM from my local machine.
 </p>
