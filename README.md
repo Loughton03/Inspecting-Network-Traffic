@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.imgur.com/Clzj7Xs.png" alt="osTicket logo"/>
+<img src="https://i.imgur.com/wrBxEZP.png" alt="osTicket logo"/>
 </p>
 
 <h1>Inspecting Network Traffic Between Azure Virtual Machines</h1>
