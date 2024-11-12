@@ -17,11 +17,6 @@ In this lab, I explored and analyzed network traffic to and from Azure virtual m
 - Windows 10</b> (21H2)
 - Ubuntu Server 22.04
 
-<h2>List of Prerequisites</h2>
-
-- Azure Virtual Machine
-- osTicket Installation Files
-
 <h2>Lab Set-Up</h2>
 <p>I created two virtual machines within Azure on the same virtual network to enable internal communication. One VM was configured with Windows 10 Pro and the other with Ubuntu Server 20.04.</p>
 
@@ -38,15 +33,19 @@ Using Remote Desktop Connection, I connected to the Windows VM using its public 
 <p>
 <b>ICMP Traffic Analysis:</b>
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
-  
+<p>
+<img src="https://i.imgur.com/e7spnkU.png" height="80%" width="80%" alt="icmp traffic"/>
+</p>
+
 I filtered for ICMP (Internet Control Message Protocol) traffic in Wireshark and used PowerShell to execute the ping command. This command uses ICMP to test connectivity by pinging the Ubuntu VM's private IP and google.com. I then used a continuous ping (ping -t [IP address]) to monitor traffic and demonstrate how network security groups function.
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<p>
+<img src="https://i.imgur.com/Yx7qDfQ.png" height="80%" width="80%" alt="Inbound-Security-rules"/>
+</p>
 
 In the Azure portal, I added an inbound rule to the Ubuntu VM's network security group to block ICMP traffic, ensuring it had a higher priority than the SSH rule (priority 300) to apply the block first. 
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<img src="https://i.imgur.com/n5Hr2IW.png" height="80%" width="80%" alt="Blocking-ICMP-Traffic"/>
 
 Upon returning to the Windows VM, I observed that ICMP traffic was indeed blocked until I lifted the rule; at this point, the continuous ping resumed without timeouts.
 </p>
