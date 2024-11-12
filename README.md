@@ -54,7 +54,9 @@ Upon returning to the Windows VM, I observed that ICMP traffic was indeed blocke
 <p>
 SSH Traffic Analysis:
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<p>
+<img src="https://i.imgur.com/2as6KUX.png" height="80%" width="80%" alt="Observing-SSH-Traffic"/>
+</p>
   
 Using PowerShell, I connected to the Ubuntu server via SSH and filtered Wireshark traffic for tcp port == 22 to capture SSH sessions. Each command executed on the Ubuntu server was logged in Wireshark, giving visibility into the SSH session traffic.
 </p>
@@ -62,7 +64,9 @@ Using PowerShell, I connected to the Ubuntu server via SSH and filtered Wireshar
 <p>
 DHCP Traffic Analysis:
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<p>
+<img src="https://i.imgur.com/OX5rAaA.png" height="80%" width="80%" alt="Observing-DHCP-Traffic"/>
+</p>
 
 After logging out of the Ubuntu server, I filtered Wireshark for DHCP traffic. Using the ipconfig /renew command, I requested a new IP address from my VM, causing a brief disconnection as the IP renewed. Wireshark displayed the resulting DHCP traffic, showing the IP assignment process.
 </p>
@@ -70,9 +74,11 @@ After logging out of the Ubuntu server, I filtered Wireshark for DHCP traffic. U
 <p>
 DNS Traffic Analysis:
 
-<img src="" height="80%" width="80%" alt="place-holder"/>
+<p>
+<img src="https://i.imgur.com/nh69Xrp.png" height="80%" width="80%" alt="Observing-DNS-Traffic"/>
+</p>
 
-I filtered Wireshark for DNS traffic on udp port == 53 and used the nslookup command to query google.com and disney.com. The captured traffic displayed the DNS resolution process for these domains.
+I filtered Wireshark for DNS traffic on udp port == 53 and used the nslookup command to query google.com and tesla.com. The captured traffic displayed the DNS resolution process for these domains.
 </p>
 
 <p>
